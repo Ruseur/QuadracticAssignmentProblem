@@ -8,16 +8,26 @@ class TestAllClasses(unittest.TestCase):
         self.parser = TaillardParser('data_exo3.dat')
 
     def test_fitness(self):
-        self.assertEqual('foo'.upper(), 'FOO')
+        # in : X0   = 13452
+        # out: f    = 78
+        self.assertEqual(False, 78)
+
+        # in : X    = 43215
+        # out: f    = 43
+        self.assertEqual(False, 43)
     
     def test_voisinage(self):
-        self.assertEqual('foo'.upper(), 'FOO')
+        # in : X0   = 13452
+        # out: V    = {43152, 12453, 13542, 13425}
+        self.assertEqual(False, {43152, 12453, 13542, 13425})
 
     def test_recuit(self):
-        self.assertTrue('FOO'.isupper())
+        # in : t0   = -12/ln(0.5)
+        # out: r    = {43215}
+        self.assertEqual(False, {43215})
 
     def test_tabou(self):
-        self.assertTrue('FOO'.isupper())
+        self.assertEqual(False, True)
 
 
 if __name__ == '__main__':
