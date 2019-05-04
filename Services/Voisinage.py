@@ -6,6 +6,6 @@ class Voisinage:
         self.length = len(distances)
         self.distancemax = distancesmax
     
-    def getVoisins(self, x: list):
+    def getVoisins(self, x: list, exclude = []):
         
         return x
