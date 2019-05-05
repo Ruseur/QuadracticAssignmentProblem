@@ -9,7 +9,7 @@ class Recuit:
         self.length = len(distances)
         self.voisinage = voisinage
     
-    def resolve(self, x: list, tinit: int, numberchangetemp: int, numbermovestemp: int, mu: float):
+    def resolve(self, x: list, tinit: float, numberchangetemp: int, numbermovestemp: int, mu: float):
         xmin = nextx = x
         # todo update with real f
         fx = 1000
@@ -26,7 +26,7 @@ class Recuit:
             for l in range(1, numbermovestemp):
                 x = nextx
                 # select y
-                y = random.choice(self.voisinage.getVoisins(x))
+                y = random.choice(self.voisinage.get_voisins(x))
                 # todo update with real f
                 fy = 1000
                 delta = fy - fx
@@ -42,7 +42,7 @@ class Recuit:
                         nextx = y
                     else:
                         nextx = x
-            t[k+1] = mu * t[k]
+            t.append(mu * t[k])
             k = k + 1
             
         return xmin
