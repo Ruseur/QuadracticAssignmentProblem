@@ -1,6 +1,6 @@
 from Models.TaillardParser import TaillardParser
 
-parser = TaillardParser('tai17a.dat')
+parser = TaillardParser('tai5a.dat')
 
 connexion_matrix = parser.get_distance_matrix()
 
