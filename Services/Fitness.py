@@ -37,7 +37,6 @@ class Fitness:
         # todo prévoir une fonction pour vérifier que les matrices sont de la meme largeur que le nombre d'quipements
 
         fitness = 0
-        i = 0  # pour parcourir la demi matrice inférieure gauche
 
         for id_emplacement in range(0, len(placement_array)):
             id_equipement = placement_array[id_emplacement]
@@ -59,7 +58,6 @@ class Fitness:
                 distance = self.distance_matrix[id_emplacement][id_emplacement_relie]
 
                 fitness += distance * cout_relie
-            i += 1
 
         return fitness
 
