@@ -43,7 +43,7 @@ class Fitness:
             id_equipement = placement_array[id_emplacement]
 
             # parcourir les equipements qui lui sont relies (connexion matrix)
-            for id_equipement_relie in range(0, i):
+            for id_equipement_relie in range(0, id_equipement):
                 # print(str(id_emplacement) + ' ' + str(id_equipement))
                 # parcourir les distances qui reliee * le cout de la connexion les ajouter a la fitness
                 cout_relie = self.connexion_matrix[id_equipement][id_equipement_relie]
