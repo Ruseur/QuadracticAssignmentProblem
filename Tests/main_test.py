@@ -1,5 +1,6 @@
 import unittest
 from Models.TaillardParser import TaillardParser
+from Services.Fitness import Fitness
 from Services.Voisinage import Voisinage
 
 # https://docs.python.org/3/library/unittest.html
@@ -9,13 +10,18 @@ class TestAllClasses(unittest.TestCase):
         self.parser = TaillardParser('data_exo3.dat')
 
     def test_fitness(self):
+        
+        connexion_matrix = self.parser.get_connexion_matrix()
+        distance_matrix = self.parser.get_distance_matrix()
+
+        fitness = Fitness(connexion_matrix, distance_matrix)
         # in : X0   = 13452
         # out: f    = 78
-        self.assertEqual(False, 78)
+        self.assertEqual(fitness.calcul([0,2,3,4,1]), 78)
 
         # in : X    = 43215
         # out: f    = 43
-        self.assertEqual(False, 43)
+        self.assertEqual(fitness.calcul([3,2,1,0,4]), 43)
     
     def test_voisinage(self):
         distances = self.parser.get_distance_matrix()
