@@ -2,6 +2,7 @@ import unittest
 from Models.TaillardParser import TaillardParser
 from Services.Fitness import Fitness
 from Services.Voisinage import Voisinage
+from Services.Recuit import Recuit
 
 # https://docs.python.org/3/library/unittest.html
 class TestAllClasses(unittest.TestCase):
@@ -31,9 +32,14 @@ class TestAllClasses(unittest.TestCase):
         self.assertEqual(voisinage.get_voisins([0,2,3,4,1]), [[3,2,0,4,1], [0,2,4,3,1], [0,1,3,4,2], [0,2,3,1,4]])
 
     def test_recuit(self):
+        distances = self.parser.get_distance_matrix()
+        connexions = self.parser.get_connexion_matrix()
+        voisinage = Voisinage(distances)
+        fitness = Fitness(connexions, distances)
+        recuit = Recuit(distances, connexions, voisinage, fitness)
         # in : t0   = -12/ln(0.5)
         # out: r    = {43215}
-        self.assertEqual(False, {43215})
+        self.assertEqual(recuit.resolve([0,1,2,3,4], 100, 100, 100, 0.5), [3,2,1,0,4])
 
     def test_tabou(self):
         self.assertEqual(False, True)
