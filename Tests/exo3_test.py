@@ -6,7 +6,7 @@ from Services.Recuit import Recuit
 from Services.Tabou import Tabou
 
 # https://docs.python.org/3/library/unittest.html
-class TestAllClasses(unittest.TestCase):
+class TestExo3(unittest.TestCase):
 
     def setUp(self):
         self.parser = TaillardParser('data_exo3.dat')
@@ -27,7 +27,7 @@ class TestAllClasses(unittest.TestCase):
     
     def test_voisinage(self):
         distances = self.parser.get_distance_matrix()
-        voisinage = Voisinage(distances)
+        voisinage = Voisinage(distances, "distances", 1)
         # in : X0   = 13452
         # out: V    = {43152, 12453, 13542, 13425}
         self.assertEqual(voisinage.get_voisins([0,2,3,4,1]), [[3,2,0,4,1], [0,2,4,3,1], [0,1,3,4,2], [0,2,3,1,4]])
@@ -40,16 +40,15 @@ class TestAllClasses(unittest.TestCase):
         recuit = Recuit(distances, connexions, voisinage, fitness)
         # in : t0   = -12/ln(0.5)
         # out: r    = {43215}
-        self.assertEqual(recuit.resolve([0,1,2,3,4], 100, 100, 100, 0.3), [3,2,1,0,4])
+        self.assertEqual(recuit.resolve([0,1,2,3,4], 100, 100, 100, 0.9), [3,2,1,0,4])
 
     def test_tabou(self):
-        self.parser = TaillardParser('tai12a.dat')
         distances = self.parser.get_distance_matrix()
         connexions = self.parser.get_connexion_matrix()
-        voisinage = Voisinage(distances, 1)
+        voisinage = Voisinage(distances)
         fitness = Fitness(connexions, distances)
         tabou = Tabou(distances, connexions, voisinage, fitness)
-        self.assertEqual(tabou.resolve([0,1,2,3,4,5,6,7,8,9,10,11], 10), [7,0,5,1,10,9,2,4,8,6,11,3])
+        self.assertEqual(tabou.resolve([0,1,2,3,4], 10), [3,2,1,0,4])
 
 
 if __name__ == '__main__':

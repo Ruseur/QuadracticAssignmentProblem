@@ -8,10 +8,10 @@ class TaillardParser:
             raise Exception('FileError')
 
     def get_connexion_matrix(self):
-        return self.readmatrix(0)
+        return self.readmatrix(self.file_size + 1)
 
     def get_distance_matrix(self):
-        return self.readmatrix(self.file_size + 1)
+        return self.readmatrix(0)
 
     def readmatrix(self, index):
         file_reader = self.init_reader()

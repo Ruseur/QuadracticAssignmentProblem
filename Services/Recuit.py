@@ -11,7 +11,7 @@ class Recuit:
         self.voisinage = voisinage
         self.fitness = fitness
     
-    def resolve(self, x: list, tinit: int, numberchangetemp: int, numbermovestemp: int, mu: float):
+    def resolve(self, x: list, t: int, numberchangetemp: int, numbermovestemp: int, mu: float):
         xmin = nextx = x
         # todo update with real f
         fmin = fx = fnextx = self.fitness.calcul(x)
@@ -21,8 +21,7 @@ class Recuit:
         y = []
         fy = 0
         k = 0
-        t = tinit
-
+        
         for k in range(0, numberchangetemp):
             for l in range(1, numbermovestemp):
                 x = nextx
