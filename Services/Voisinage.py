@@ -13,7 +13,7 @@ class Voisinage:
             for x in y:
                 if (i == j):
                     break
-                elif x <= self.distancemax:
+                elif x <= self.distancemax and x != 0:
                     permutations.append([i,j])
                 i += 1
             i = 0
@@ -37,7 +37,7 @@ class Voisinage:
             elif (len(x) == b+1):
                 voisin = voisin + x[a+1:b]
             else:
-                voisin = voisin + x[a+1:b-1]
+                voisin = voisin + x[a+1:b]
             voisin = voisin + [ x[a] ]
             voisin = voisin + x[b+1:]
 
