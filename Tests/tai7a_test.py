@@ -35,7 +35,7 @@ class TestTai12a(unittest.TestCase):
         voisinage = Voisinage(distances)
         fitness = Fitness(connexions, distances)
         tabou = Tabou(distances, connexions, voisinage, fitness)
-        self.assertEqual(tabou.resolve([0,1,2,3,4,5,6,7,8,9,10,11], 1000), [7,0,5,1,10,9,2,4,8,6,11,3])
+        self.assertEqual(tabou.resolve(voisinage.get_random_x(), 1000), [7,0,5,1,10,9,2,4,8,6,11,3])
 
 
 if __name__ == '__main__':

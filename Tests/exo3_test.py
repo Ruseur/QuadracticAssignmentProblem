@@ -48,7 +48,7 @@ class TestExo3(unittest.TestCase):
         voisinage = Voisinage(distances)
         fitness = Fitness(connexions, distances)
         tabou = Tabou(distances, connexions, voisinage, fitness)
-        self.assertEqual(tabou.resolve([0,1,2,3,4], 10), [3,2,1,0,4])
+        self.assertEqual(tabou.resolve(voisinage.get_random_x(), 10), [3,2,1,0,4])
 
 
 if __name__ == '__main__':

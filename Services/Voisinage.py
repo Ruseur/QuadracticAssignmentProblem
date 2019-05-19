@@ -86,3 +86,9 @@ class Voisinage:
                 voisins.append(voisin)
 
         return voisins
+
+    def get_random_x(self):
+        length = len(self.distances)
+        x = list(range(0,length))
+        x = random.sample(x, length)
+        return x
