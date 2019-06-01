@@ -12,17 +12,14 @@ class Tabou:
         self.voisinage = voisinage
         self.fitness = fitness
     
-    def resolve(self, x: list, tabousize: int, maxIter = 1000):
+    def resolve(self, x: list, tabousize: int, maxiter = 1000):
         xmin = nextx = x
-        # todo update with real f
         fx = fmin = fnextx = self.fitness.calcul(x)
-
         tabou = []
         tabou.append(x)
-        
         C = []
 
-        for i in range(0, maxIter):
+        for i in range(0, maxiter):
             try:
                 C = self.voisinage.get_voisins(x , tabou)
             except:
