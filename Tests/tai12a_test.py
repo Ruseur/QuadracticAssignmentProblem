@@ -13,12 +13,12 @@ class TestTai12a(unittest.TestCase):
 
     def test_fitness(self):
         
-        connexion_matrix = self.parser.get_connexion_matrix()
         distance_matrix = self.parser.get_distance_matrix()
+        connexion_matrix = self.parser.get_connexion_matrix()
 
         fitness = Fitness(connexion_matrix, distance_matrix)
 
-        self.assertEqual(fitness.calcul([4, 11, 6, 3, 1, 9, 2, 8, 7, 5, 0, 10]), 224416)
+        self.assertEqual(fitness.calcul([7,0,5,1,10,9,2,4,8,6,11,3]), 224416)
         
     def test_recuit(self):
         distances = self.parser.get_distance_matrix()
