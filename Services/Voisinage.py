@@ -2,14 +2,17 @@ import random
 
 class Voisinage:
 
+    __all_permutations = []
+
     def __init__(self, distances: list, type="default", *args):
         self.distances = distances
+        self.__all_permutations = self.get_permutations(distances)
         if type == "distances":
             self.permutations = self.get_permutations_by_distances(distances, args[0])
         elif type == "random":
             self.permutations = self.get_permutations_random(distances, args[0])
         else:
-            self.permutations = self.get_permutations(distances)
+            self.permutations = self.__all_permutations
         
     
     def get_permutations_by_distances(self, distances: list, distancesmax = 1):
@@ -49,17 +52,19 @@ class Voisinage:
            Calcul du voisinage par défaut
         '''
         permutations = []
-        i = 0
         maxint = len(distances)-1
 
-        while i < taille:
-            a = random.randint(0, maxint)
-            b = random.randint(0, maxint)
-            if(a == b) or ([a,b] in permutations) or ([b,a] in permutations):
-                continue
-            else:
-                permutations.append([a,b])
-                i += 1
+        indexes = list(range(0,maxint))
+        random.shuffle(indexes)
+
+        random_indexes = []
+        if(taille >= maxint):
+            random_indexes = indexes
+        else:
+            random_indexes = indexes[:taille]
+
+        for index in random_indexes:
+            permutations.append(self.__all_permutations[index])
 
         return permutations
 
