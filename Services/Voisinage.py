@@ -52,20 +52,16 @@ class Voisinage:
            Calcul du voisinage par défaut
         '''
         permutations = []
-        maxint = len(distances)-1
+        maxint = len(self.__all_permutations)
 
         indexes = list(range(0,maxint))
         random.shuffle(indexes)
 
-        random_indexes = []
-        if(taille >= maxint):
-            random_indexes = indexes
-        else:
-            random_indexes = indexes[:taille]
-
-        for index in random_indexes:
-            permutations.append(self.__all_permutations[index])
-
+        i = 0
+        while i != maxint and i < taille:
+            permutations.append(self.__all_permutations[indexes[i]])
+            i = i + 1
+        
         return permutations
 
     def get_voisins(self, x: list, exclude = []):
