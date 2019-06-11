@@ -59,7 +59,7 @@ class Fitness:
 
                 fitness += distance * cout_relie
 
-        return fitness
+        return fitness * 2
 
     def calcul_opti(self, placement_array, id_position_changed1, id_position_changed_2):
         return 'opti'
