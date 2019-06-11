@@ -1,16 +1,22 @@
 import random
 import math
 import sys
+from threading import Thread
 from Services.Voisinage import Voisinage
 from Services.Fitness import Fitness
 
-class Tabou:
-    def __init__(self, distances: list, poids: list, voisinage: Voisinage, fitness: Fitness):
+class Tabou(Thread):
+    def __init__(self, distances: list, poids: list, voisinage: Voisinage, fitness: Fitness, regen_permutations = False):
         self.distances = distances
         self.poids = poids
         self.length = len(distances)
         self.voisinage = voisinage
         self.fitness = fitness
+        self.regen_permutations = regen_permutations
+        Thread.__init__(self)
+
+    def run(self):
+        """ Code executer au lancement du Thread """
     
     def resolve(self, x: list, tabousize: int, maxiter = 1000):
         xmin = nextx = x
@@ -21,7 +27,7 @@ class Tabou:
 
         for i in range(0, maxiter):
             try:
-                C = self.voisinage.get_voisins(x , tabou)
+                C = self.voisinage.get_voisins(x , tabou, self.regen_permutations)
             except:
                 print("here")
             miny = self.getMinY(C)

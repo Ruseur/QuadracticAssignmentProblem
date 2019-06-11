@@ -1,19 +1,27 @@
 import random
+from threading import Thread
 
-class Voisinage:
-
+class Voisinage(Thread):
     __all_permutations = []
 
     def __init__(self, distances: list, type="default", *args):
+        Thread.__init__(self)
         self.distances = distances
         self.__all_permutations = self.get_permutations(distances)
-        if type == "distances":
-            self.permutations = self.get_permutations_by_distances(distances, args[0])
-        elif type == "random":
-            self.permutations = self.get_permutations_random(distances, args[0])
+        self.permutations_type = type
+        self.permutations_taille = args[0] if args else 0
+        self.gen_permutations()
+
+    def run(self):
+        """ Code executer au lancement du Thread """
+    
+    def gen_permutations(self):
+        if self.permutations_type == "distances":
+            self.permutations = self.get_permutations_by_distances(self.distances, self.permutations_taille)
+        elif self.permutations_type == "random":
+            self.permutations = self.get_permutations_random(self.distances, self.permutations_taille)
         else:
             self.permutations = self.__all_permutations
-        
     
     def get_permutations_by_distances(self, distances: list, distancesmax = 1):
         '''
@@ -64,9 +72,11 @@ class Voisinage:
         
         return permutations
 
-    def get_voisins(self, x: list, exclude = []):
+    def get_voisins(self, x: list, exclude = [], regen_permutations = False):
         voisins = []
         voisin = []
+        if regen_permutations:
+            self.gen_permutations()
 
         for permutation in self.permutations:
             a = permutation[0]
