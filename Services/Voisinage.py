@@ -94,7 +94,7 @@ class Voisinage(Thread):
             voisin = voisin + x[b+1:]
 
             if (voisin not in exclude):
-                voisins.append(voisin)
+                voisins.append([voisin, permutation])
 
         return voisins
 

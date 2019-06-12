@@ -46,8 +46,9 @@ class Recuit(Thread):
                 x = nextx
                 fx = fnextx
                 # select y
-                y = random.choice(self.voisinage.get_voisins(x, [], self.regen_permutations))
-                fy = self.fitness.calcul(y)
+                voisin = random.choice(self.voisinage.get_voisins(x, [], self.regen_permutations))
+                y = voisin[0]
+                fy = self.fitness.calcul(y, voisin[1][0], voisin[1][1])
                 delta = fy - fx
 
                 if delta <= 0:

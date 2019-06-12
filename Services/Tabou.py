@@ -63,9 +63,9 @@ class Tabou(Thread):
         fy = 0
          
         for y in list:
-            fy = self.fitness.calcul(y)
+            fy = self.fitness.calcul(y[0],y[1][0],y[1][1])
             if fy < fminy or len(miny) == 0:
-                miny = y
+                miny = y[0]
                 fminy = fy
 
         return {

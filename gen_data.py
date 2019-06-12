@@ -114,11 +114,10 @@ def gen_data_tabou(input = "", version = 1, nb_par_data = 50):
                 'duration': tabou.duration
             })
 
-# list_data = ["tai12a", "tai15a", "tai17a", "tai20a", "tai25a", "tai30a", "tai35a", "tai40a", "tai50a", "tai60a", "tai80a", "tai100a"]
-list_data_recuit = [ "tai80a", "tai100a"]
-for data in list_data_recuit:
-    gen_data_recuit(data, 1, 50)
+list_data = ["tai12a", "tai15a", "tai17a", "tai20a", "tai25a", "tai30a", "tai35a", "tai40a", "tai50a", "tai60a", "tai80a", "tai100a"]
 
-list_data_tabou = ["tai25a", "tai30a", "tai35a", "tai40a", "tai50a", "tai60a", "tai80a", "tai100a"]
-for data in list_data_tabou:
-    gen_data_tabou(data, 1, 50)
+for data in list_data:
+    gen_data_recuit(data, 2, 50)
+
+for data in list_data:
+    gen_data_tabou(data, 2, 50)
