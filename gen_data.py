@@ -10,7 +10,6 @@ import datetime
 import multiprocessing as mp
 
 
-jobs = mp.Queue()
 
 def gen_data(input_data = [], nb_par_data = 200):
     start_time = time.time()
@@ -28,13 +27,13 @@ def gen_data(input_data = [], nb_par_data = 200):
         for i in list_i:
             recuit = Recuit(parser.get_distance_matrix(), parser.get_connexion_matrix(), voisinage, fitness)
             recuit.init_values(voisinage.get_random_x(), 100, 100, 100, 0.9)
-            p = mp.process(target=recuit.my_run)
-            jobs.put(recuit)
+            print(input + " - " + str(i))
+            list_recuit.append(recuit)
     
     print("Fin instanciation recuits")
     print("Temps necessaire: {}".format(time.time() - start_time))
-    for job in jobs:
-        job.start()
+    for recuit in list_recuit:
+        recuit.start()
 
     # On attend que tous les threads se terminent
     print("Fin lancement threads")
