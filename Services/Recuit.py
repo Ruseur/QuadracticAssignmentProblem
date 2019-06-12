@@ -13,6 +13,7 @@ class Recuit(Thread):
         self.voisinage = voisinage
         self.fitness = fitness
         self.regen_permutations = regen_permutations
+        self.i = 0
         Thread.__init__(self)
 
     def init_values(self, x: list, t: float, numberchangetemp: int, numbermovestemp: int, mu: float):
@@ -26,6 +27,16 @@ class Recuit(Thread):
         """ Code executer au lancement du Thread """
         start_time = time.time()
         self.solution = self.resolve(self.x, self.t, self.numberchangetemp, self.numbermovestemp, self.mu)
+        ## Duration in seconds
+        self.duration = time.time() - start_time
+        self.solution_fitness = self.fitness.calcul(self.solution)
+
+    def my_run(self, x):
+        """ Code executer au lancement du multiprocess """
+        print(str(len(x)))
+        self.i = self.i + 1
+        start_time = time.time()
+        self.solution = self.resolve(x, self.t, self.numberchangetemp, self.numbermovestemp, self.mu)
         ## Duration in seconds
         self.duration = time.time() - start_time
         self.solution_fitness = self.fitness.calcul(self.solution)
