@@ -47,7 +47,6 @@ def gen_data_recuit(input = "", version = 1, nb_par_data = 200):
     end_time = time.time()
     print("Temps necessaire: {}".format(end_time - start_time))
 
-
     print("Ecriture CSV")
     with open('data/exports/recuit/v'+ str(version)+ "_" +  input + '.csv', mode='w', newline="\n", encoding="utf-8") as output_file:
         fieldnames = ['initial', 'solution', 'fitness', 'duration']
