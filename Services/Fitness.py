@@ -1,11 +1,10 @@
 class Fitness:
     from random import randint
 
-    cost_array = []
-
     def __init__(self, connexion_matrix, distance_matrix):
         self.connexion_matrix = connexion_matrix
         self.distance_matrix = distance_matrix
+        self.valeur = 0
 
     # End point
     def calcul(self, *args):
@@ -43,23 +42,18 @@ class Fitness:
 
             # parcourir les equipements qui lui sont relies (connexion matrix)
             for id_equipement_relie in range(0, id_equipement):
-                # print(str(id_emplacement) + ' ' + str(id_equipement))
-                # parcourir les distances qui reliee * le cout de la connexion les ajouter a la fitness
+
                 cout_relie = self.connexion_matrix[id_equipement][id_equipement_relie]
 
                 id_emplacement_relie = placement_array.index(id_equipement_relie)
 
-                # print('======================')
-                # print(self.distance_matrix)
-                # print('---------')
-                # print(id_emplacement)
-                # print('---------')
                 # print(id_emplacement_relie)
                 distance = self.distance_matrix[id_emplacement][id_emplacement_relie]
 
                 fitness += distance * cout_relie
 
-        return fitness * 2
+        self.valeur = fitness * 2
+        return self.valeur
 
     def calcul_opti(self, placement_array, id_position_changed1, id_position_changed_2):
         return 'opti'

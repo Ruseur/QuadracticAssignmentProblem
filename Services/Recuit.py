@@ -22,7 +22,7 @@ class Recuit(Thread):
         self.numbermovestemp = numbermovestemp
         self.mu = mu
 
-    def my_run(self):
+    def run(self):
         """ Code executer au lancement du Thread """
         start_time = time.time()
         self.solution = self.resolve(self.x, self.t, self.numberchangetemp, self.numbermovestemp, self.mu)
