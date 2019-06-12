@@ -30,16 +30,6 @@ class Recuit(Thread):
         ## Duration in seconds
         self.duration = time.time() - start_time
         self.solution_fitness = self.fitness.calcul(self.solution)
-
-    def my_run(self, x):
-        """ Code executer au lancement du multiprocess """
-        print(str(len(x)))
-        self.i = self.i + 1
-        start_time = time.time()
-        self.solution = self.resolve(x, self.t, self.numberchangetemp, self.numbermovestemp, self.mu)
-        ## Duration in seconds
-        self.duration = time.time() - start_time
-        self.solution_fitness = self.fitness.calcul(self.solution)
     
     def resolve(self, x: list, t: float, numberchangetemp: int, numbermovestemp: int, mu: float):
         xmin = nextx = x
