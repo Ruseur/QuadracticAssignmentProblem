@@ -1,5 +1,6 @@
 import random
 import math
+import time
 from threading import Thread
 from Services.Voisinage import Voisinage
 from Services.Fitness import Fitness
@@ -12,10 +13,23 @@ class Recuit(Thread):
         self.voisinage = voisinage
         self.fitness = fitness
         self.regen_permutations = regen_permutations
+        self.i = 0
         Thread.__init__(self)
+
+    def init_values(self, x: list, t: float, numberchangetemp: int, numbermovestemp: int, mu: float):
+        self.x = x
+        self.t = t
+        self.numberchangetemp = numberchangetemp
+        self.numbermovestemp = numbermovestemp
+        self.mu = mu
 
     def run(self):
         """ Code executer au lancement du Thread """
+        start_time = time.time()
+        self.solution = self.resolve(self.x, self.t, self.numberchangetemp, self.numbermovestemp, self.mu)
+        ## Duration in seconds
+        self.duration = time.time() - start_time
+        self.solution_fitness = self.fitness.calcul(self.solution)
     
     def resolve(self, x: list, t: float, numberchangetemp: int, numbermovestemp: int, mu: float):
         xmin = nextx = x

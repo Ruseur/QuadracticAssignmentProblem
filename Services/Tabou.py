@@ -1,6 +1,7 @@
 import random
 import math
 import sys
+import time
 from threading import Thread
 from Services.Voisinage import Voisinage
 from Services.Fitness import Fitness
@@ -15,8 +16,18 @@ class Tabou(Thread):
         self.regen_permutations = regen_permutations
         Thread.__init__(self)
 
+    def init_values(self, x: list, tabousize: int, maxiter = 1000):
+        self.x = x
+        self.tabousize = tabousize
+        self.maxiter = maxiter
+
     def run(self):
         """ Code executer au lancement du Thread """
+        start_time = time.time()
+        self.solution = self.resolve(self.x, self.tabousize, self.maxiter)
+        ## Duration in seconds
+        self.duration = time.time() - start_time
+        self.solution_fitness = self.fitness.calcul(self.solution)
     
     def resolve(self, x: list, tabousize: int, maxiter = 1000):
         xmin = nextx = x
