@@ -52,8 +52,23 @@ class Fitness:
 
                 fitness += distance * cout_relie
 
-        self.valeur = fitness * 2
+        self.valeur = fitness * 2  # on stocke la valeur de fitness pour optimiser le calcul
+
         return self.valeur
 
-    def calcul_opti(self, placement_array, id_position_changed1, id_position_changed_2):
-        return 'opti'
+    def calcul_opti(self, placement_array, id_position_changed_1, id_position_changed_2):
+        if self.valeur == 0: # si pas de valeur deja calcule alors on fait le calcul général
+            return self.calcul_all(placement_array)
+        else:
+            delta = 0
+            id_equipement_1 = placement_array[id_position_changed_1]
+            id_equipement_2 = placement_array[id_position_changed_2]
+
+            for id_emplacement in range(0, len(placement_array)):
+                if id_emplacement != id_position_changed_1 and id_emplacement != id_position_changed_2:
+                    value_k = placement_array[id_emplacement]
+                    delta += (self.connexion_matrix[id_equipement_1][value_k] - self.connexion_matrix[id_equipement_2][value_k]) * (self.distance_matrix[id_position_changed_1][id_emplacement] - self.distance_matrix[id_position_changed_2][id_emplacement])
+
+            self.valeur += delta
+
+            return self.valeur

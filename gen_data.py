@@ -42,7 +42,7 @@ def gen_data(input_data = [], nb_par_data = 200):
         
         recuit.init_values(voisinage.get_random_x(), 100, 100, 100, 0.9)
 
-        results[input] = pool.map(recuit.my_run, list_x)
+        results.append(pool.map(recuit.my_run, list_x))
 
         # for i in list_i:
         #     recuit = Recuit(parser.get_distance_matrix(), parser.get_connexion_matrix(), voisinage, fitness)
