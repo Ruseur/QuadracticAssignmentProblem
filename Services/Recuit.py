@@ -48,12 +48,14 @@ class Recuit(Thread):
                 # select y
                 voisin = random.choice(self.voisinage.get_voisins(x, [], self.regen_permutations))
                 y = voisin[0]
+                # fy = self.fitness.calcul(y)
                 fy = self.fitness.calcul(y, voisin[1][0], voisin[1][1])
                 delta = fy - fx
 
                 if delta <= 0:
                     nextx = y
                     fnextx = fy
+                    self.fitness.setValeurActuelle(fnextx)  # Affectation de la valeur actuelle
                     if fy < fmin:
                         xmin = y
                         fmin = fy
@@ -61,6 +63,8 @@ class Recuit(Thread):
                     p = round(random.uniform(0,1), 1)
                     if p <= math.exp(-delta / t):
                         nextx = y
+                        fnextx = fy
+                        self.fitness.setValeurActuelle(fnextx)  # Affectation de la valeur actuelle
                     else:
                         nextx = x
             t = mu * t

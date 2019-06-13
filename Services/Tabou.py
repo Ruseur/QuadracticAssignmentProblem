@@ -44,6 +44,8 @@ class Tabou(Thread):
             miny = self.getMinY(C)
             nextx = miny['x']
             fnextx = miny['f']
+            
+            self.fitness.setValeurActuelle(fnextx)  # Affectation de la valeur actuelle
 
             deltaf = fnextx - fx
             if (deltaf <= 0):

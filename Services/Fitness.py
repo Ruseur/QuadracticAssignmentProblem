@@ -69,6 +69,7 @@ class Fitness:
                     value_k = placement_array[id_emplacement]
                     delta += (self.connexion_matrix[id_equipement_1][value_k] - self.connexion_matrix[id_equipement_2][value_k]) * (self.distance_matrix[id_position_changed_1][id_emplacement] - self.distance_matrix[id_position_changed_2][id_emplacement])
 
-            self.valeur += delta
+            return self.valeur + (delta * 2)
 
-            return self.valeur
+    def setValeurActuelle(self, v):
+        self.valeur = v

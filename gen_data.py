@@ -9,7 +9,7 @@ import time
 import datetime
 import csv
 
-def gen_data_recuit(input = "", version = 1, nb_par_data = 200):
+def gen_data_recuit(input = "", version = 1, nb_par_data = 200, mu = 0.5):
     start_time = time.time()
     print(datetime.datetime.fromtimestamp(start_time))
     list_i = range(0, nb_par_data)
@@ -23,7 +23,7 @@ def gen_data_recuit(input = "", version = 1, nb_par_data = 200):
     
     for i in list_i:
         recuit = Recuit(parser.get_distance_matrix(), parser.get_connexion_matrix(), voisinage, fitness, True)
-        recuit.init_values(voisinage.get_random_x(), 100, 50, 50, 0.3)
+        recuit.init_values(voisinage.get_random_x(), 100, 50, 50, mu)
         list_recuit.append(recuit)
     
     print("Fin instanciation recuits")
@@ -61,7 +61,7 @@ def gen_data_recuit(input = "", version = 1, nb_par_data = 200):
                 'duration': recuit.duration
             })
 
-def gen_data_tabou(input = "", version = 1, nb_par_data = 50):
+def gen_data_tabou(input = "", version = 1, nb_par_data = 50, tabousize = 10):
     start_time = time.time()
     print(datetime.datetime.fromtimestamp(start_time))
     list_i = range(0, nb_par_data)
@@ -74,8 +74,8 @@ def gen_data_tabou(input = "", version = 1, nb_par_data = 50):
     fitness = Fitness(parser.get_connexion_matrix(), parser.get_distance_matrix())
     
     for i in list_i:
-        tabou = Tabou(parser.get_distance_matrix(), parser.get_connexion_matrix(), voisinage, fitness, True)
-        tabou.init_values(voisinage.get_random_x(), 50, 250)
+        tabou = Tabou(parser.get_distance_matrix(), parser.get_connexion_matrix(), voisinage, fitness, False)
+        tabou.init_values(voisinage.get_random_x(), tabousize, 250)
         list_tabou.append(tabou)
     
     print("Fin instanciation tabou")
@@ -117,7 +117,8 @@ def gen_data_tabou(input = "", version = 1, nb_par_data = 50):
 list_data = ["tai12a", "tai15a", "tai17a", "tai20a", "tai25a", "tai30a", "tai35a", "tai40a", "tai50a", "tai60a", "tai80a", "tai100a"]
 
 for data in list_data:
-    gen_data_recuit(data, 3, 50)
+    gen_data_recuit(data, 3, 50, 0.3)
+
 
 for data in list_data:
-    gen_data_tabou(data, 3, 50)
+    gen_data_tabou(data, 3, 50, 100)
